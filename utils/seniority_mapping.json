@@ -1,0 +1,31 @@
+{
+    "ENTRY_LEVEL": [
+        "entry level", "entry-level", "junior", "graduate", "trainee", 
+        "cadet", "student", "apprentice", "third-year apprentice",
+        "1st year apprentice", "early-career", "graduate/junior"
+    ],
+    
+    "MID_LEVEL": [
+        "intermediate", "entry-level to intermediate", 
+        "junior-intermediate", "junior-to-intermediate"
+    ],
+    
+    "EXPERIENCED": [
+        "experienced", "experienced assistant", "specialist", 
+        "associate", "independent"
+    ],
+    
+    "SENIOR": [
+        "senior", "senior lead", "senior/principal", 
+        "advanced", "retired"
+    ],
+    
+    "MANAGEMENT": [
+        "lead", "supervisor", "manager", "intermediate management"
+    ],
+    
+    "EXECUTIVE": [
+        "head", "director", "principal", "chief", "deputy", 
+        "executive", "associate director", "associate-director"
+    ]
+}
