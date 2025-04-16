@@ -1,31 +1,38 @@
 {
     "ENTRY_LEVEL": [
-        "entry level", "entry-level", "junior", "graduate", "trainee", 
-        "cadet", "student", "apprentice", "third-year apprentice",
-        "1st year apprentice", "early-career", "graduate/junior"
+        "entry level", "junior", "graduate", "trainee", "apprentice", 
+        "entry-level", "student", "graduate/junior", "1st year apprentice",
+        "apprentice-first-year", "entry level assistant", "2nd year apprentice",
+        "4th year apprentice", "junior assistant"
     ],
     
     "MID_LEVEL": [
-        "intermediate", "entry-level to intermediate", 
-        "junior-intermediate", "junior-to-intermediate"
+        "intermediate", "assistant", "mid-level", "entry-level to intermediate",
+        "intermediate apprentice", "junior-intermediate", "standard", "level 2",
+        "qualified"
     ],
     
     "EXPERIENCED": [
-        "experienced", "experienced assistant", "specialist", 
-        "associate", "independent"
+        "experienced", "associate", "experienced assistant", "specialist",
+        "independent", "coordinator", "intermediate to senior",
+        "post-doctoral", "postdoctoral"
     ],
     
     "SENIOR": [
-        "senior", "senior lead", "senior/principal", 
-        "advanced", "retired"
+        "senior", "senior associate", "mid-senior", "advanced",
+        "senior assistant", "senior/lead", "senior head"
     ],
     
     "MANAGEMENT": [
-        "lead", "supervisor", "manager", "intermediate management"
+        "lead", "manager", "supervisor", "assistant manager", "sous",
+        "assistant head", "middle management", "middle-management",
+        "general-manager"
     ],
     
     "EXECUTIVE": [
-        "head", "director", "principal", "chief", "deputy", 
-        "executive", "associate director", "associate-director"
+        "head", "principal", "executive", "director", "chief", "deputy",
+        "board", "senior lead", "owner", "senior-executive", "second-in-command",
+        "associate director", "regional head", "assistant director",
+        "owner-operator", "senior executive"
     ]
 }
