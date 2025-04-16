@@ -66,12 +66,12 @@ def analyze_seniority_distribution(file_path, output_dir=None):
         counts.reverse()
         
         # Plot distribution
-        plt.figure(figsize=(10, 8))
+        plt.figure(figsize=(30, 24))
         plt.barh(levels, counts)
         plt.title('Seniority Level Distribution', fontsize=16)
         plt.ylabel('Seniority Level', fontsize=14)
         plt.xlabel('Count', fontsize=14)
-        plt.xlim(0, 250)  # Set x-axis range to 0-250 to include count and percent label
+        plt.xlim(0, 1000)  # Set x-axis range to 0-250 to include count and percent label
         
         # Add count and percent labels to bars
         for i, (level, count) in enumerate(zip(levels, counts)):
@@ -86,13 +86,24 @@ def analyze_seniority_distribution(file_path, output_dir=None):
         print(f"\nDistribution plot saved to: {output_path}")
         plt.close()
     
+    # Print distribution to terminal
+    print("\nSeniority Level Distribution:")
+    print("-" * 60)
+    print(f"{'Seniority Level':<25} {'Count':<10} {'Percentage':<10}")
+    print("-" * 60)
+    for _, row in distribution_df.iterrows():
+        print(f"{row['Seniority Level']:<25} {row['Count']:<10} {row['Percentage']:<10}")
+    print("-" * 60)
+    print(f"Total: {total} entries")
+    
     return distribution
 
 def main():
     """Main function to parse arguments and run analysis."""
     parser = argparse.ArgumentParser(description="Analyze seniority distribution in dataset")
     parser.add_argument("--file", type=str, 
-                        default="../../MISC/job_data_files/seniority_labelled_test_set.csv",
+                        # default="../../MISC/job_data_files/seniority_labelled_test_set.csv",
+                        default="../../MISC/job_data_files/seniority_labelled_development_set.csv",
                         help="Path to the seniority dataset")
     parser.add_argument("--output-dir", type=str, default="analysis_results",
                         help="Directory to save visualization output")
