@@ -107,14 +107,14 @@ class ClaudeEvaluator(LLMEvaluator):
             output_tokens (int): Number of output tokens
             
         Returns:
-            float: Calculated cost in USD
+            float: Calculated cost in USD, rounded to 6 decimal places
+        Raises:
+            ValueError: If pricing information for the base model is not found.
         """
         if self.base_model in self.pricing:
             input_cost = (input_tokens / 1_000_000) * self.pricing[self.base_model]["input"]
             output_cost = (output_tokens / 1_000_000) * self.pricing[self.base_model]["output"]
-            return input_cost + output_cost
+            return round(input_cost + output_cost, 6)
         else:
-            # Default to claude-3-7-sonnet pricing if model not found
-            input_cost = (input_tokens / 1_000_000) * self.pricing["claude-3-7-sonnet"]["input"]
-            output_cost = (output_tokens / 1_000_000) * self.pricing["claude-3-7-sonnet"]["output"]
-            return input_cost + output_cost 
+            # If pricing for the specific base model is not found, raise an error.
+            raise ValueError(f"Pricing information not found for base model: {self.base_model}") 
