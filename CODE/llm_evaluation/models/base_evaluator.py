@@ -26,6 +26,14 @@ class LLMEvaluator:
         """
         self.model_variant = model_variant
         self.task_name = task_name
+        
+        # Dynamically import the task module from tasks folder
+        try:
+            self.task_module = importlib.import_module(f"tasks.{task_name}")
+        except ImportError:
+            print(f"Warning: Task module for '{task_name}' not found")
+            self.task_module = None
+        
         # Initialize results dictionary to store results for each example
         self.results = {
             "predictions": [],
@@ -38,12 +46,10 @@ class LLMEvaluator:
             "job_ids": []  # Store job IDs for reference
         }
         
-        # Dynamically import the task module from tasks folder without modifying the base evaluator class
-        try:
-            self.task_module = importlib.import_module(f"tasks.{task_name}") # import path
-        except ImportError:
-            print(f"Warning: Task module for '{task_name}' not found")
-            self.task_module = None
+        # Initialize task-specific result fields
+        if self.task_module and hasattr(self.task_module, 'get_additional_fields'):
+            for field in self.task_module.get_additional_fields():
+                self.results[field] = []
     
     def call_api(self, prompt):
         """Call the LLM API with the given prompt.
@@ -158,15 +164,30 @@ class LLMEvaluator:
             
             # Determine column names based on task
             job_id_col = "id" if "id" in df.columns else "job_id"
-            job_ad_col = "job_ad" if "job_ad" in df.columns else "job_ad_details"
-            truth_col = "y_true"  # seniority task may use mapping column
+            
+            # Get ground truth column from task module
+            truth_col = "y_true"  # Default
+            if self.task_module and hasattr(self.task_module, 'get_ground_truth_column'):
+                truth_col = self.task_module.get_ground_truth_column()
+            
+            # Get additional columns to track
+            additional_columns = {}
+            if self.task_module and hasattr(self.task_module, 'get_additional_columns'):
+                additional_columns = self.task_module.get_additional_columns()
             
             # Process each example
             for idx, row in df.iterrows():
                 try:
-                    # Extract job ad and true label
+                    # Extract job id
                     job_id = str(row[job_id_col])
-                    job_ad = row[job_ad_col]
+                    
+                    # Extract job ad using task-specific method if available
+                    if self.task_module and hasattr(self.task_module, 'prepare_job_ad'):
+                        job_ad = self.task_module.prepare_job_ad(row)
+                    else:
+                        # Default fallback
+                        job_ad_col = "job_ad" if "job_ad" in row else "job_ad_details"
+                        job_ad = row[job_ad_col] if job_ad_col in row else ""
                     
                     # Clean job ad if it contains HTML
                     if "<" in str(job_ad) and ">" in str(job_ad):
@@ -174,6 +195,11 @@ class LLMEvaluator:
                     
                     # Get ground truth
                     ground_truth = str(row[truth_col]) if truth_col in row else "unknown"
+                    
+                    # Track additional columns
+                    for result_field, source_column in additional_columns.items():
+                        if source_column in row:
+                            self.results[result_field].append(str(row[source_column]))
                     
                     # Create prompt
                     prompt = self.create_prompt(job_ad)
@@ -210,6 +236,11 @@ class LLMEvaluator:
                     self.results["total_tokens"].append(0)
                     self.results["costs"].append(0)
                     self.results["job_ids"].append(job_id if 'job_id' in locals() else str(idx))
+                    
+                    # Add placeholder for additional fields
+                    for result_field in additional_columns.keys():
+                        if result_field in self.results:
+                            self.results[result_field].append("error")
             
             # Calculate metrics from self.results
             metrics = self._calculate_metrics()
@@ -285,7 +316,7 @@ class LLMEvaluator:
     def _log_artifacts(self):
         """Create and log artifacts to MLflow."""
         # Create results DataFrame
-        results_df = pd.DataFrame({
+        results_dict = {
             "job_id": self.results["job_ids"],
             "prediction": self.results["predictions"],
             "ground_truth": self.results["ground_truth"],
@@ -294,7 +325,17 @@ class LLMEvaluator:
             "output_tokens": self.results["output_tokens"],
             "total_tokens": self.results["total_tokens"],
             "cost": self.results["costs"]
-        })
+        }
+        
+        # Add task-specific columns to results
+        if self.task_module and hasattr(self.task_module, 'get_result_columns'):
+            additional_columns = self.task_module.get_result_columns()
+            for output_col, source_field in additional_columns.items():
+                if source_field in self.results:
+                    results_dict[output_col] = self.results[source_field]
+        
+        # Create DataFrame
+        results_df = pd.DataFrame(results_dict)
         
         # Save results as CSV
         results_path = f"{self.model_variant}_{self.task_name}_results.csv"
@@ -339,17 +380,27 @@ class LLMEvaluator:
             mlflow.log_artifact(cm_path)
 
             # Find misclassified examples
-            misclassified = [(self.results["job_ids"][i], 
-                             self.results["ground_truth"][i], 
-                             self.results["predictions"][i]) 
-                            for i in range(len(self.results["ground_truth"])) 
-                            if self.results["ground_truth"][i] != self.results["predictions"][i] 
-                            and self.results["predictions"][i] != "error"]
+            misclassified_indices = [i for i in range(len(self.results["ground_truth"])) 
+                          if self.results["ground_truth"][i] != self.results["predictions"][i] 
+                          and self.results["predictions"][i] != "error"]
             
-            # Log misclassified examples
-            if misclassified:
-                misclassified_df = pd.DataFrame(misclassified, 
-                                                columns=["job_id", "ground_truth", "prediction"])
+            # Create misclassified DataFrame
+            if misclassified_indices:
+                misclassified_dict = {
+                    "job_id": [self.results["job_ids"][i] for i in misclassified_indices],
+                    "ground_truth": [self.results["ground_truth"][i] for i in misclassified_indices],
+                    "prediction": [self.results["predictions"][i] for i in misclassified_indices]
+                }
+                
+                # Add task-specific columns to misclassified results
+                if self.task_module and hasattr(self.task_module, 'get_result_columns'):
+                    additional_columns = self.task_module.get_result_columns()
+                    for output_col, source_field in additional_columns.items():
+                        if source_field in self.results:
+                            misclassified_dict[output_col] = [self.results[source_field][i] for i in misclassified_indices]
+                
+                # Create DataFrame
+                misclassified_df = pd.DataFrame(misclassified_dict)
                 misclassified_path = f"{self.model_variant}_{self.task_name}_misclassified.csv"
                 misclassified_df.to_csv(misclassified_path, index=False)
                 mlflow.log_artifact(misclassified_path)
@@ -360,8 +411,6 @@ class LLMEvaluator:
             with open(report_path, "w") as f:
                 f.write(report)
             mlflow.log_artifact(report_path)
-            
-
 
 
         # Clean up temporary files
