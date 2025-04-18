@@ -4,10 +4,11 @@ Configuration settings for LLM evaluation.
 
 # Define tasks and their corresponding dataset paths
 TASKS_DATAPATH = {    
-    "work_arrangement": "../../MISC/job_data_files/work_arrangements_test_set.csv",
+    "work_arrangement": "../../MISC/job_data_files/work_arrangements_development_set.csv",
     # "work_arrangement": "../../MISC/label_unlabelled_data/lable_work_arrangement.csv",
-    "salary": "../../MISC/label_unlabelled_data/lable_work_arrangement.csv", 
-    "seniority": "../../MISC/seniority_data_mapped/seniority_labelled_test_set_mapped.csv"
+    "salary": "../../MISC/job_data_files/salary_labelled_development_set.csv", 
+    "seniority": "../../MISC/seniority_data_mapped/seniority_labelled_development_set_mapped.csv",
+    # "seniority": "../../MISC/seniority_data_mapped/seniority_labelled_test_set_mapped.csv"
 }
 
 # Define  model variants available for testing

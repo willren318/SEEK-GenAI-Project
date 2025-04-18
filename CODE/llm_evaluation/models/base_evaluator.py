@@ -115,12 +115,15 @@ class LLMEvaluator:
             return self.task_module.parse_prediction(prediction)
         return prediction.strip()
     
-    def evaluate_dataset(self, dataset_path, mlflow_tracking=True, limit=None):
+    def evaluate_dataset(self, dataset_path, mlflow_tracking=True, sample_range=None):
         """Evaluate the model on a dataset and track with MLflow.
         Args:
             dataset_path (str): Path to the CSV dataset
             mlflow_tracking (bool): Whether to track results with MLflow
-            limit (int, optional): Limit the number of examples to process
+            sample_range (int | tuple[int, int] | None): 
+                - If int: Limit the number of examples to process from the beginning.
+                - If tuple (start, end): Process examples from start index (inclusive) to end index (exclusive).
+                - If None: Process all examples.
         Returns:
             dict: Evaluation metrics
         """
@@ -144,8 +147,14 @@ class LLMEvaluator:
                 mlflow.log_param("evaluation_date", datetime.datetime.now().strftime("%Y-%m-%d"))
                 mlflow.log_param("evaluation_time", datetime.datetime.now().strftime("%H:%M:%S"))
                 
-                if limit:
-                    mlflow.log_param("sample_limit", limit)
+                # Log sample range/limit
+                if isinstance(sample_range, int):
+                    mlflow.log_param("sample_limit", sample_range)
+                elif isinstance(sample_range, (list, tuple)) and len(sample_range) == 2:
+                    mlflow.log_param("sample_start_index", sample_range[0])
+                    mlflow.log_param("sample_end_index", sample_range[1])
+                elif sample_range is not None:
+                     print(f"Warning: Invalid sample_range format: {sample_range}. Processing all examples.")
                 
                 # Set tags
                 mlflow.set_tag("model_family", self.model_variant.split("-")[0])
@@ -154,12 +163,34 @@ class LLMEvaluator:
 
             
             # Read dataset
-            df = pd.read_csv(dataset_path)
+            df_full = pd.read_csv(dataset_path)
+            df = df_full # Default to using the full dataframe
             
-            # Limit examples if specified
-            if limit is not None and limit > 0 and limit < len(df):
-                df = df.head(limit)
-                
+            # Apply sample range or limit
+            if isinstance(sample_range, int):
+                limit = sample_range
+                if limit > 0 and limit < len(df_full):
+                    df = df_full.head(limit)
+                    print(f"Limiting to first {len(df)} examples.")
+                elif limit <= 0:
+                     print(f"Warning: Sample limit ({limit}) must be positive. Processing all examples.")
+                elif limit >= len(df_full):
+                    print(f"Warning: Sample limit ({limit}) is >= dataset size ({len(df_full)}). Processing all examples.")
+            
+            elif isinstance(sample_range, (list, tuple)) and len(sample_range) == 2:
+                start, end = sample_range
+                if 0 <= start < end <= len(df_full):
+                    df = df_full[start:end]
+                    print(f"Processing examples from index {start} to {end} (exclusive). Total: {len(df)} examples.")
+                else:
+                    print(f"Warning: Invalid sample range ({start}, {end}) for dataset size {len(df_full)}. Processing all examples.")
+                    # Reset df to full if range is invalid
+                    df = df_full
+            
+            elif sample_range is not None:
+                 # Already warned during MLflow logging
+                 pass # Process all examples
+
             print(f"Processing {len(df)} examples...")
             
             # Determine column names based on task
@@ -406,7 +437,7 @@ class LLMEvaluator:
                 mlflow.log_artifact(misclassified_path)
 
             # Generate classification report
-            report = classification_report(valid_ground_truth, valid_predictions, labels=labels)
+            report = classification_report(valid_ground_truth, valid_predictions, labels=labels, zero_division=0)
             report_path = f"{self.model_variant}_{self.task_name}_classification_report.txt"
             with open(report_path, "w") as f:
                 f.write(report)
