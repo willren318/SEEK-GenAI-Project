@@ -60,7 +60,7 @@ class ClaudeEvaluator(LLMEvaluator):
         try:
             response = self.client.messages.create(
                 model=self.model_variant,
-                max_tokens=50, # max output tokens
+                max_tokens=500, # Increased max output tokens
                 temperature=0.0,  # use deterministic output
                 messages=[
                     {"role": "user", "content": prompt}
@@ -74,7 +74,7 @@ class ClaudeEvaluator(LLMEvaluator):
             
             result = {
                 "prediction": prediction,
-                "latency": end_time - start_time,
+                "latency": round(end_time - start_time, 6),
                 "input_tokens": response.usage.input_tokens,
                 "output_tokens": response.usage.output_tokens,
                 "total_tokens": response.usage.input_tokens + response.usage.output_tokens
@@ -93,7 +93,7 @@ class ClaudeEvaluator(LLMEvaluator):
             # Return default values on error
             return {
                 "prediction": "ERROR",
-                "latency": time.time() - start_time,
+                "latency": round(time.time() - start_time, 6),
                 "input_tokens": 0,
                 "output_tokens": 0,
                 "total_tokens": 0,
