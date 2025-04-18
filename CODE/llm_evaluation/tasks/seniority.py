@@ -4,6 +4,7 @@ Seniority classification task.
 
 from prompts.templates import get_template
 import pandas as pd
+import re
 
 
 def get_additional_fields():
@@ -61,14 +62,21 @@ def create_prompt(job_ad):
 
 def parse_prediction(prediction):
     """
-    Parse the LLM's prediction to extract the seniority label.
+    Parse the LLM's prediction to extract the single-word seniority label.
     Args:
-        prediction (str): Raw prediction from the LLM
+        prediction (str): Raw prediction from the LLM (expected to be a single category word).
     Returns:
-        str: Parsed label (entry, mid, senior, executive)
+        str: Parsed label (e.g., ENTRY_LEVEL, MID_LEVEL, etc.) or original prediction if format is unexpected.
     """
     prediction = prediction.strip()
-    return prediction
+    
+    # Optional: Validate if it's one of the expected categories
+    valid_categories = ["ENTRY_LEVEL", "MID_LEVEL", "EXPERIENCED", "SENIOR", "MANAGEMENT", "EXECUTIVE"]
+    if prediction in valid_categories:
+        return prediction
+    else:
+        print(f"Warning: Prediction '{prediction}' is not a standard category. Returning as is.")
+        return prediction # Return the stripped prediction even if not standard
 
 
 def get_result_columns():
