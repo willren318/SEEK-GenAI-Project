@@ -8,16 +8,16 @@ import mlflow
 from models import ClaudeEvaluator
 from config import TASKS_DATAPATH, MODELS, MLFLOW_CONFIG, MODELS_VARIANTS 
 
-def run_experiment(model_type, task_name, dataset_path, limit=None, model_variant=None):
+def run_experiment(model_type, task_name, dataset_path, sample_range=None, model_variant=None):
     """
     Run a single experiment with the specified model_type, model_variant and task.
     Example:
-    python run_experiments.py --model claude --task work_arrangement --limit 5 --model-variant claude-3-haiku   
+    python run_experiments.py --model claude --task work_arrangement --start_index 0 --end_index 5 --model-variant claude-3-haiku   
     Args:
         model_type (str): type of model to use (claude, llama, etc.)
         task_name (str): name of the task (work_arrangement, salary, seniority)
         dataset_path (str): path to the dataset
-        limit (int, optional): limit the number of examples to process
+        sample_range (tuple[int, int] | None): Process examples from start index (inclusive) to end index (exclusive). If None, process all.
         model_variant (str, optional): specific model variant to use (eg. claude-3-5-haiku)
     Returns:
         dict: Evaluation metrics
@@ -32,7 +32,7 @@ def run_experiment(model_type, task_name, dataset_path, limit=None, model_varian
     model_config = MODELS[model_type].copy() 
     model_class_name = model_config['class']
     model_name = model_config['name']
-    model_params = model_config['parameters']
+    model_params = model_config.get('parameters', {})
     
     # Use specific model variant with releasing date
     if model_type == "claude" and model_variant:
@@ -54,15 +54,21 @@ def run_experiment(model_type, task_name, dataset_path, limit=None, model_varian
     evaluator = model_class(model_variant=model_variant, task_name=task_name, **model_params)
     
     # Run evaluation and get metrics
-    metrics = evaluator.evaluate_dataset(dataset_path, limit=limit)
+    metrics = evaluator.evaluate_dataset(
+        dataset_path,
+        sample_range=sample_range
+    )
     
     # Print summary
     model_display = f"{model_type.upper()} ({model_variant})" if model_variant else model_type.upper()
     print(f"\n--- {model_display} on {task_name} ---")
-    print(f"Accuracy: {metrics.get('accuracy', 0):.4f}")
+    print(f"Accuracy: {metrics.get('accuracy', 'N/A')}")
     print(f"Total cost: ${metrics.get('total_cost', 0):.4f}")
     print(f"Average latency: {metrics.get('avg_latency', 0):.4f} seconds")
     print(f"Total tokens: {metrics.get('total_tokens', 0)}")
+    print(f"Processed samples: {metrics.get('sample_count', 0)}")
+    if 'error_rate' in metrics:
+        print(f"Error rate: {metrics.get('error_rate', 0):.2%}")
     
     return metrics
 
@@ -73,9 +79,12 @@ def main():
                         default="claude", help="Model to evaluate")
     parser.add_argument("--task", choices=list(TASKS_DATAPATH.keys()), 
                         required=True, help="Task to evaluate")
-    parser.add_argument("--limit", type=int, default=None, 
-                        help="Limit the number of examples to process")
-    parser.add_argument("--tracking-uri", type=str, default=MLFLOW_CONFIG["tracking_uri"],
+    parser.add_argument("--start_index", type=int, default=None,
+                        help="0-based starting index of the sample range (inclusive)")
+    parser.add_argument("--end_index", type=int, default=None,
+                        help="0-based ending index of the sample range (exclusive)")
+    parser.add_argument("--tracking-uri", type=str,
+                        default=MLFLOW_CONFIG.get("tracking_uri") if MLFLOW_CONFIG else None,
                         help="MLflow tracking URI (default: from config)")
     parser.add_argument("--model-variant", choices=list(MODELS_VARIANTS.keys()),
                         help="Specific model variant to use")
@@ -84,21 +93,41 @@ def main():
     # Get task and model from arguments
     model = args.model
     task = args.task
-    limit = args.limit
+    start_index = args.start_index
+    end_index = args.end_index
     model_variant = args.model_variant
         
     # Get dataset path from config
-    dataset_path = TASKS_DATAPATH[task]
-    if not os.path.exists(dataset_path):
-        print(f"Error: Dataset not found at {dataset_path}.")
+    dataset_path = TASKS_DATAPATH.get(task)
+    if not dataset_path:
+        print(f"Error: Task '{task}' not found in tasks configuration.")
         return
-        
+    if not os.path.exists(dataset_path):
+        print(f"Error: Dataset not found at configured path: {dataset_path}.")
+        return
+
+    # Determine sample_range based on provided arguments
+    sample_range = None
+    if start_index is not None and end_index is not None:
+        if start_index >= 0 and end_index > start_index:
+            sample_range = (start_index, end_index)
+            print(f"Processing samples from index {start_index} (inclusive) to {end_index} (exclusive).")
+        else:
+            print(f"Warning: Invalid range --start_index {start_index} --end_index {end_index}. Must have start >= 0 and end > start. Processing all examples.")
+    elif start_index is not None or end_index is not None:
+        print("Warning: Both --start_index and --end_index must be provided to specify a range. Processing all examples.")
+    else:
+        print("Processing all examples.")
+
     # Run the single experiment
     metrics = run_experiment(
-        model, task, dataset_path, limit, model_variant
+        model, task, dataset_path, sample_range, model_variant
     )
-    
-    print(f"Experiment complete. View results in MLflow UI.")
+
+    if metrics:
+        print(f"\nExperiment complete. View results in MLflow UI.")
+    else:
+        print(f"\nExperiment failed or returned no metrics.")
 
 if __name__ == "__main__":
     main() 
