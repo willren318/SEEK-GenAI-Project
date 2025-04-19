@@ -19,7 +19,9 @@ MODELS_VARIANTS = {
     "claude-3-7-sonnet": "claude-3-7-sonnet-20250219",
     "llama3.1-8b": "llama3.1-8b",
     "llama3.1-70b": "llama3.1-70b",
-    "llama4-maverick": "llama4-maverick"
+    "llama4-maverick": "llama4-maverick",
+    "deepseek-chat": "deepseek-chat",
+    "deepseek-reasoner": "deepseek-reasoner"
 }
 
 # Define model configurations
@@ -32,6 +34,11 @@ MODELS = {
     "llama": {
         "class": "LlamaEvaluator",
         "name": "llama3.1-70b",
+        "parameters": {}
+    },
+    "deepseek": {
+        "class": "DeepSeekEvaluator",
+        "name": "deepseek-chat",
         "parameters": {}
     }
 }

@@ -19,10 +19,7 @@ TEMPLATES = {
     """,
     
     # Salary extraction
-    "salary": """Analyze the following job advertisement text and extract the salary information.
-
-    Job Advertisement:
-    {job_ad}
+    "salary": """Analyze the job advertisement text that will be provided at the end of these instructions and extract the salary information.
 
     Instructions:
     1. **Prioritize Salary Source:** First, look for salary information within the 'Salary Additional Text:' section of the Job Advertisement, if present. Use this information and ignore the 'Job Details:' and 'Job Title:' sections. If no salary details are found in the 'Salary Additional Text:' section, then analyze the 'Job Details:' and 'Job Title:' sections.
@@ -50,6 +47,9 @@ TEMPLATES = {
     You MUST output ONLY the formatted salary string (e.g., 37-84-AUD-HOURLY or 16000-16000-PHP-MONTHLY or 0-0-None-None).
     DO NOT include ANY other text, reasoning, explanations, or thinking steps.
     Your entire response must consist of ONLY the formatted string.
+
+    Job Advertisement:
+    {job_ad}
     """,
     
     # Seniority classification
