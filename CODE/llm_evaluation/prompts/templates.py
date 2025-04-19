@@ -27,27 +27,30 @@ TEMPLATES = {
     Instructions:
     1. **Prioritize Salary Source:** First, look for salary information within the 'Salary Additional Text:' section of the Job Advertisement, if present. Use this information and ignore the 'Job Details:' and 'Job Title:' sections. If no salary details are found in the 'Salary Additional Text:' section, then analyze the 'Job Details:' and 'Job Title:' sections.
     2. **Extract Components:** Attempt to extract the minimum salary, maximum salary, currency, and pay period (e.g., HOURLY, MONTHLY, ANNUAL, WEEKLY).
-    3. **Handle PHP Nation Exception:** If the 'Nation:' is 'PH', check the text within 'Job Details:'.
+    3. **Determine Currency from Nation:** Derive the 3-letter currency code DIRECTLY from the 'Nation:' section of the Job Advertisement. Use standard mappings (e.g., AU -> AUD, PH -> PHP, SG -> SGD, NZ -> NZD, MY -> MYR, HK -> HKD). 
+    4. **Handle PHP Nation Exception:** If the 'Nation:' is 'PH', check the text within 'Job Details:'.
        - Look for the exact text pattern "Compensation" followed by a numerical value on the same or next line (e.g., "Compensation 16000" or "Compensation\n16000").
        - If you find this "Compensation" pattern with a number, use this numerical value *only*. Round it to the nearest integer and use it for both min_salary and max_salary.
        - In this case (Nation: PH and the "Compensation" pattern found), explicitly IGNORE any separate text like "Compensation Range" followed by a range (e.g., "Compensation Range ₱15,000 - ₱20,000").
        - If only a "Compensation Range" pattern is found (and no preceding "Compensation" pattern with a single number), then use the range provided after "Compensation Range".
-    4. **Rounding Only Decimal Salary Values:** round any decimal salary values to the nearest integer.
-    5. **Handle Tenure-Based Rates and Bonuses:** If multiple pay rates are listed based on duration of employment, use ONLY the starting rate for both min_salary and max_salary. Explicitly EXCLUDE any separate bonuses or one-time payments from the salary range.
-    6. **Formatting:** Format the output strictly as: min_salary-max_salary-currency-period
+    5. **Rounding Only Decimal Salary Values:** round any decimal salary values to the nearest integer.
+    6. **Handle Tenure-Based Rates and Bonuses:** If multiple pay rates are listed based on duration of employment, use ONLY the starting rate for BOTH min_salary and max_salary. Explicitly EXCLUDE any separate bonuses or one-time payments from the salary range.
+    7. **Formatting:** Format the output strictly as: min_salary-max_salary-currency-period
        - Use INTEGERS for min_salary and max_salary resulting from the rounding rule above.
-       - Use standard 3-letter currency codes (e.g., MYR, HKD, AUD, NZD, SGD, PHP).
+       - Use standard 3-letter currency codes (e.g., MYR, HKD, AUD, NZD, SGD, PHP) as determined by rule 3.
        - Use standard period names: ONLY HOURLY, MONTHLY, ANNUAL, or WEEKLY are valid.
-    7. **Single Value:** If only a single salary amount is mentioned (and the PHP rule didn't use a specific "Compensation" value), use its rounded integer value for both min_salary and max_salary.
-    8. **Range:** If a salary range is specified (and the PHP rule didn't apply or used the "Compensation Range"), use the rounded integer values for min_salary and max_salary.
-    9. **Strict Completeness Check:** AFTER applying rules 1-7, you MUST verify that you have determined ALL THREE parts: (A) a valid non-zero salary integer or range, (B) a valid 3-letter currency code, AND (C) a valid period that is *exactly* one of HOURLY, MONTHLY, ANNUAL, or WEEKLY. 
+    8. **Single Value:** If only a single salary amount is mentioned (and the PHP rule didn't use a specific "Compensation" value), use its rounded integer value for both min_salary and max_salary.
+    9. **Range:** If a salary range is specified (and the PHP rule didn't apply or used the "Compensation Range"), use the rounded integer values for min_salary and max_salary.
+    10. **Strict Completeness Check:** AFTER applying rules 1-8, you MUST verify that you have determined ALL THREE parts: (A) a valid non-zero salary integer or range, (B) a valid 3-letter currency code, AND (C) a valid period that is *exactly* one of HOURLY, MONTHLY, ANNUAL, or WEEKLY. 
        - If component (A), (B), OR (C) is missing, cannot be determined, or is not valid according to the allowed values (e.g., the period is missing or something other than the 4 allowed words), then the entire extraction is invalid. 
        - In case of ANY invalidity, you MUST output exactly: 0-0-None-None. 
        - CRITICAL: Do NOT output partial results. For example, if you find USD and 20 but cannot determine a valid period from the allowed list, output 0-0-None-None, NOT 20-20-USD-None.
 
-    Your response MUST contain ONLY the formatted salary string (e.g., 37-84-AUD-HOURLY or 16000-16000-PHP-MONTHLY or 0-0-None-None) and NO other text, explanation, or conversational filler.
-
-    Extracted Salary:""",
+    CRITICAL FORMATTING REQUIREMENT:
+    You MUST output ONLY the formatted salary string (e.g., 37-84-AUD-HOURLY or 16000-16000-PHP-MONTHLY or 0-0-None-None).
+    DO NOT include ANY other text, reasoning, explanations, or thinking steps.
+    Your entire response must consist of ONLY the formatted string.
+    """,
     
     # Seniority classification
     "seniority": """
@@ -73,7 +76,9 @@ TEMPLATES = {
     **Job Advertisement:**
     {job_ad}
 
-    **Provide your answer as ONLY a single word matching one of the category names exactly (e.g., ENTRY_LEVEL, MID_LEVEL, etc.). Do not include any reasoning or explanation.**
+    CRITICAL FORMATTING REQUIREMENT: 
+    You MUST respond with ONLY ONE of these six category names: ENTRY_LEVEL, MID_LEVEL, EXPERIENCED, SENIOR, MANAGEMENT, or EXECUTIVE.
+    Your entire response must be ONLY the category name with NO other text, explanation, periods, or any additional content.
     """
 }
 
