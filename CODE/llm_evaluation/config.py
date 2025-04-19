@@ -13,11 +13,13 @@ TASKS_DATAPATH = {
 
 # Define  model variants available for testing
 MODELS_VARIANTS = {
-    "claude-3-opus": "claude-3-opus-20240229",
+    # "claude-3-opus": "claude-3-opus-20240229",
     "claude-3-haiku": "claude-3-haiku-20240307",
-    "claude-3-5-sonnet": "claude-3-5-sonnet-20240620",
+    # "claude-3-5-sonnet": "claude-3-5-sonnet-20240620",
     "claude-3-7-sonnet": "claude-3-7-sonnet-20250219",
-    # "llama-3-70b": "llama-3-70b-8192"
+    "llama3.1-8b": "llama3.1-8b",
+    "llama3.1-70b": "llama3.1-70b",
+    "llama4-maverick": "llama4-maverick"
 }
 
 # Define model configurations
@@ -29,7 +31,7 @@ MODELS = {
     },
     "llama": {
         "class": "LlamaEvaluator",
-        "name": "llama-3-70b",
+        "name": "llama3.1-70b",
         "parameters": {}
     }
 }

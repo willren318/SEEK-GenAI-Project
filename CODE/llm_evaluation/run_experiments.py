@@ -5,7 +5,8 @@ Main script to run LLM evaluation experiments with MLflow tracking.
 import os
 import argparse
 import mlflow
-from models import ClaudeEvaluator
+from models.claude_evaluator import ClaudeEvaluator
+from models.llama_evaluator import LlamaEvaluator
 from config import TASKS_DATAPATH, MODELS, MLFLOW_CONFIG, MODELS_VARIANTS 
 
 def run_experiment(model_type, task_name, dataset_path, sample_range=None, model_variant=None):
@@ -46,7 +47,7 @@ def run_experiment(model_type, task_name, dataset_path, sample_range=None, model
     if model_class_name == "ClaudeEvaluator":
         model_class = ClaudeEvaluator
     elif model_class_name == "LlamaEvaluator":
-        pass
+        model_class = LlamaEvaluator
     else:
         raise ValueError(f"Model class '{model_class_name}' not supported yet")
     

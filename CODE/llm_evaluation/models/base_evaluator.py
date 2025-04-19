@@ -409,6 +409,7 @@ class LLMEvaluator:
             cm_path = f"{self.model_variant}_{self.task_name}_confusion_matrix.png"
             plt.savefig(cm_path)
             mlflow.log_artifact(cm_path)
+            plt.close() # Close the plot to free up memory
 
             # Find misclassified examples
             misclassified_indices = [i for i in range(len(self.results["ground_truth"])) 
@@ -447,11 +448,13 @@ class LLMEvaluator:
         # Clean up temporary files
         try:
             os.remove(results_path)
-            if 'cm_path' in locals():
+            if 'cm_path' in locals() and os.path.exists(cm_path):
                 os.remove(cm_path)
-            if 'misclassified_path' in locals():
+            if 'misclassified_path' in locals() and os.path.exists(misclassified_path):
                 os.remove(misclassified_path)
-            if 'report_path' in locals():
+            if 'report_path' in locals() and os.path.exists(report_path):
                 os.remove(report_path)
-        except:
-            pass 
+        except OSError as e: # More specific error handling
+            print(f"Warning: Error removing temporary file: {e}")
+        except Exception as e:
+            print(f"Warning: An unexpected error occurred during file cleanup: {e}") 
