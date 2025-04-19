@@ -1,0 +1,25 @@
+[project]
+name = "comp6713-seek-project"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "datasets>=3.5.0",
+    "gensim>=4.3.3",
+    "ipykernel>=6.29.5",
+    "jupyter>=1.1.1",
+    "nltk>=3.9.1",
+    "numpy>=1.26.4",
+    "pandas>=2.2.3",
+    "peft>=0.15.1",
+    "scikit-learn>=1.6.1",
+    "scipy>=1.13.1",
+    "torch>=2.6.0",
+    "transformers>=4.51.1",
+    "trl>=0.16.1",
+    "protobuf>=5.29.4",
+    "sentencepiece>=0.2.0",
+    "markupsafe>=3.0.2",
+    "bitsandbytes>=0.41.5",
+]

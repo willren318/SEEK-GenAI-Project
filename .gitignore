@@ -173,6 +173,13 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
+.idea
+.vscode
+
+CODE/results
+
+wandb/
+
 CODE/llm_evaluation/mlruns/*
 .DS_Store
 .pdf
