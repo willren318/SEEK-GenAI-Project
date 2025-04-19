@@ -179,3 +179,7 @@ cython_debug/
 CODE/results
 
 wandb/
+
+CODE/llm_evaluation/mlruns/*
+.DS_Store
+.pdf

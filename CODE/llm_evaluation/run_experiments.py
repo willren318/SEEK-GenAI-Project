@@ -7,6 +7,7 @@ import argparse
 import mlflow
 from models.claude_evaluator import ClaudeEvaluator
 from models.llama_evaluator import LlamaEvaluator
+from models.deepseek_evaluator import DeepSeekEvaluator
 from config import TASKS_DATAPATH, MODELS, MLFLOW_CONFIG, MODELS_VARIANTS 
 
 def run_experiment(model_type, task_name, dataset_path, sample_range=None, model_variant=None):
@@ -15,7 +16,7 @@ def run_experiment(model_type, task_name, dataset_path, sample_range=None, model
     Example:
     python run_experiments.py --model claude --task work_arrangement --start_index 0 --end_index 5 --model-variant claude-3-haiku   
     Args:
-        model_type (str): type of model to use (claude, llama, etc.)
+        model_type (str): type of model to use (claude, llama, deepseek, etc.)
         task_name (str): name of the task (work_arrangement, salary, seniority)
         dataset_path (str): path to the dataset
         sample_range (tuple[int, int] | None): Process examples from start index (inclusive) to end index (exclusive). If None, process all.
@@ -48,6 +49,8 @@ def run_experiment(model_type, task_name, dataset_path, sample_range=None, model
         model_class = ClaudeEvaluator
     elif model_class_name == "LlamaEvaluator":
         model_class = LlamaEvaluator
+    elif model_class_name == "DeepSeekEvaluator":
+        model_class = DeepSeekEvaluator
     else:
         raise ValueError(f"Model class '{model_class_name}' not supported yet")
     
@@ -70,6 +73,14 @@ def run_experiment(model_type, task_name, dataset_path, sample_range=None, model
     print(f"Processed samples: {metrics.get('sample_count', 0)}")
     if 'error_rate' in metrics:
         print(f"Error rate: {metrics.get('error_rate', 0):.2%}")
+    
+    # Print cache hit information for DeepSeek models
+    if model_class_name == "DeepSeekEvaluator" and "cache_hit_tokens" in metrics:
+        print(f"Cache hit tokens: {metrics.get('cache_hit_tokens', 0)}")
+        print(f"Cache miss tokens: {metrics.get('cache_miss_tokens', 0)}")
+        if metrics.get('total_input_tokens', 0) > 0:
+            cache_hit_rate = metrics.get('cache_hit_tokens', 0) / metrics.get('total_input_tokens', 0)
+            print(f"Cache hit rate: {cache_hit_rate:.2%}")
     
     return metrics
 
