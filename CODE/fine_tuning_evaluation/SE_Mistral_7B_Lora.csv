@@ -1,0 +1,690 @@
+y_true,y_pred,similarity
+senior,senior,1.0
+experienced,senior,0.6280180811882019
+entry level,intermediate,0.7054049968719482
+senior,senior,1.0
+intermediate,entry level,0.7054049968719482
+experienced,experienced,1.0000001192092896
+experienced,experienced,1.0000001192092896
+entry level,assistant,0.6055725812911987
+entry level,entry level,1.0
+experienced,experienced,1.0000001192092896
+senior,senior,1.0
+experienced,intermediate,0.6473829746246338
+experienced,experienced,1.0000001192092896
+senior,senior,1.0
+trainee,trainee,1.0
+experienced,experienced,1.0
+experienced,experienced,1.0
+intermediate,entry level,0.7054049968719482
+apprentice,apprentice,1.0
+entry level,entry level,1.0
+entry level,entry level,1.0
+entry level,entry level,1.0000001192092896
+experienced,experienced,1.0000001192092896
+experienced,experienced,1.0000001192092896
+experienced,experienced,1.0000001192092896
+experienced,experienced,1.0000001192092896
+graduate,intermediate,0.6371270418167114
+senior,senior,1.0
+senior,senior,1.0
+intermediate,intermediate,1.0
+head,senior,0.671886682510376
+senior,experienced,0.6280180811882019
+supervisor,supervisor,1.0000001192092896
+lead,lead,1.0
+experienced,experienced,1.0000001192092896
+entry level,entry level,1.0
+experienced,experienced,1.0
+trainee,trainee,1.0
+entry level,intermediate,0.7054048776626587
+intermediate,intermediate,1.0
+experienced,experienced,1.0
+entry level,intermediate,0.7054048776626587
+experienced,experienced,1.0
+lead,lead,1.0
+senior,senior,1.0
+entry level,entry level,1.0
+experienced,experienced,1.0
+assistant,assistant,1.0
+intermediate,intermediate,1.0
+intermediate,intermediate,1.0
+experienced assistant,assistant,0.8387092351913452
+assistant,assistant,1.0
+intermediate,entry level,0.7054048776626587
+lead,intermediate,0.5622169375419617
+entry level,intermediate,0.7054048776626587
+experienced,experienced,1.0
+senior,senior,1.0
+experienced,intermediate,0.6473828554153442
+experienced,experienced,1.0
+assistant,assistant,1.0
+intermediate,intermediate,1.0
+entry level,entry level,1.0
+senior,head,0.671886682510376
+intermediate,intermediate,1.0
+experienced,experienced,1.0000001192092896
+experienced,experienced,1.0000001192092896
+experienced,experienced,1.0000001192092896
+junior,intermediate,0.6706231832504272
+senior,senior,1.0
+intermediate,intermediate,1.0
+senior,senior,1.0
+experienced,experienced,1.0
+lead,lead,1.0
+senior,senior,1.0
+intermediate,qualified,0.6700559854507446
+experienced,experienced,1.0
+associate,associate,0.9999998807907104
+junior,junior,1.0000001192092896
+experienced,experienced,1.0
+senior,senior,1.0
+intermediate,senior,0.6601917147636414
+junior,junior,1.0000001192092896
+trainee,trainee,1.0
+director,executive,0.6816118955612183
+experienced,experienced,1.0
+graduate/junior,graduate/junior,1.0
+intermediate,intermediate,1.0
+intermediate,intermediate,1.0
+senior,senior,1.0
+experienced,experienced,1.0
+experienced,experienced,1.0
+entry level,entry level,1.0
+entry level,junior,0.6696158647537231
+lead,lead,1.0
+entry-level,intermediate,0.7022477388381958
+experienced,experienced,1.0
+senior,head,0.671886682510376
+senior,senior,1.0
+assistant,assistant,1.0
+experienced,experienced,1.0
+experienced,experienced,1.0
+entry level,experienced,0.6793338060379028
+senior,senior,1.0
+senior,senior,1.0
+head,senior,0.671886682510376
+experienced,experienced,1.0
+experienced,experienced,1.0
+assistant,assistant,1.0
+junior,junior,1.0000001192092896
+entry level,intermediate,0.7054049968719482
+intermediate,intermediate,1.0
+lead,lead,1.0
+experienced,experienced,1.0
+senior,experienced,0.6280180811882019
+experienced,experienced,1.0
+senior,consultant,0.5315985083580017
+entry level,entry level,1.0
+intermediate,intermediate,1.0
+senior,senior,1.0
+experienced,experienced,1.0
+experienced,experienced,1.0
+entry level,intermediate,0.7054049968719482
+entry level,entry level,1.0
+entry level,intermediate,0.7054049968719482
+entry level,intermediate,0.7054049968719482
+experienced,experienced,1.0
+lead,lead,1.0
+assistant,assistant,1.0
+experienced,experienced,1.0
+intermediate,intermediate,1.0
+intermediate,intermediate,1.0
+graduate/junior,graduate,0.8691927194595337
+experienced,experienced,1.0
+intermediate,intermediate,1.0
+intermediate,entry level,0.7054049968719482
+manager,senior,0.5980278253555298
+intermediate,intermediate,1.0
+intermediate,intermediate,1.0
+experienced,experienced,1.0
+experienced,experienced,1.0
+senior,senior,1.0
+experienced,experienced,1.0
+assistant,assistant,1.0
+entry-level to intermediate,intermediate,0.8749614953994751
+experienced,experienced,1.0
+junior,junior,1.0000001192092896
+head,senior,0.671886682510376
+assistant,assistant,1.0
+experienced,experienced,1.0000001192092896
+senior,senior,1.0
+assistant,assistant,1.0
+assistant,assistant,1.0
+entry level,entry level,1.0000001192092896
+apprentice,apprentice,1.0
+intermediate,intermediate,1.0
+assistant,assistant,1.0
+experienced,intermediate,0.6473829746246338
+senior,senior,1.0
+experienced,intermediate,0.6473829746246338
+senior,experienced,0.6280180811882019
+intermediate,intermediate,1.0
+senior,head,0.671886682510376
+entry level,intermediate,0.7054049968719482
+experienced,experienced,1.0000001192092896
+intermediate,intermediate,1.0
+intermediate,intermediate,1.0
+junior,junior,1.0000001192092896
+entry level,entry level,1.0000001192092896
+experienced,experienced,1.0000001192092896
+intermediate,experienced,0.6473829746246338
+intermediate,intermediate,1.0
+entry level,experienced,0.6793338060379028
+lead,senior,0.5885132551193237
+experienced,experienced,1.0000001192092896
+entry level,entry level,1.0000001192092896
+experienced,very experienced,0.8749563694000244
+lead,lead,1.0
+intermediate,experienced,0.6473829746246338
+trainee,trainee,1.0
+experienced,experienced,1.0000001192092896
+experienced,experienced,1.0000001192092896
+senior,senior,1.0
+assistant,intermediate,0.5677452087402344
+intermediate,intermediate,1.0
+entry level,entry level,1.0000001192092896
+experienced,experienced,1.0000001192092896
+senior,senior,1.0
+head,experienced,0.6292899250984192
+experienced,experienced,1.0000001192092896
+senior,experienced,0.6280180811882019
+intermediate,experienced,0.6473829746246338
+graduate,graduate,1.0
+student,phd,0.641220211982727
+intermediate,experienced,0.6473829746246338
+intermediate,experienced,0.6473829746246338
+experienced,experienced,1.0000001192092896
+senior,senior,1.0
+intermediate,intermediate,1.0
+senior,intermediate,0.6601917743682861
+experienced,experienced,1.0000001192092896
+specialist,senior,0.6047865152359009
+intermediate,intermediate,1.0
+head,senior,0.671886682510376
+intermediate,intermediate,1.0
+experienced,experienced,1.0000001192092896
+experienced,experienced,1.0000001192092896
+senior lead,senior,0.8538718223571777
+junior,junior,1.0000001192092896
+experienced,experienced,1.0000001192092896
+lead,lead,1.0
+junior-intermediate,junior,0.8620355129241943
+senior,senior,1.0
+experienced,experienced,1.0000001192092896
+graduate,graduate,1.0
+experienced,experienced,1.0000001192092896
+intermediate,experienced,0.6473829746246338
+experienced,experienced,1.0000001192092896
+intermediate,senior,0.6601917147636414
+senior,experienced,0.6280180811882019
+intermediate,intermediate,1.0
+assistant,assistant,1.0
+head,senior,0.671886682510376
+experienced,experienced,1.0000001192092896
+junior,assistant,0.6075490713119507
+senior,intermediate,0.6601917147636414
+entry level,entry level,1.0000001192092896
+senior,senior,1.0
+intermediate,experienced,0.6473829746246338
+experienced,experienced,1.0000001192092896
+experienced,experienced,1.0000001192092896
+entry level,intermediate,0.7054049968719482
+senior,senior,1.0
+entry level,entry level,1.0000001192092896
+senior,senior,1.0
+entry level,intermediate,0.7054049968719482
+experienced,intermediate,0.6473829746246338
+senior,experienced,0.6280180811882019
+experienced,assistant,0.6425357460975647
+experienced,experienced,1.0000001192092896
+lead,lead,1.0
+experienced,senior,0.6280180811882019
+associate director,associate director,1.0
+intermediate,senior,0.6601917743682861
+intermediate,entry level,0.7054049968719482
+intermediate,senior,0.6601917743682861
+intermediate,intermediate,1.0
+experienced,entry level,0.6793338060379028
+intermediate,intermediate,1.0
+intermediate,intermediate,1.0
+executive,senior,0.6287003755569458
+head,head,1.0000001192092896
+intermediate,intermediate,1.0
+senior,experienced,0.6280180811882019
+experienced,experienced,1.0
+senior,lead,0.5885132551193237
+intermediate,intermediate,1.0
+apprentice,apprentice,1.0
+intermediate,intermediate,1.0
+senior,senior,1.0
+experienced,experienced,1.0000001192092896
+experienced,intermediate,0.6473829746246338
+experienced,experienced,1.0
+senior,senior,1.0
+senior,senior,1.0
+intermediate,intermediate,1.0
+experienced,experienced,1.0000001192092896
+intermediate,intermediate,1.0
+intermediate,experienced,0.6473829746246338
+senior,senior,1.0
+principal,principal,1.0
+intermediate,experienced,0.647382915019989
+intermediate,mid-senior,0.7213095426559448
+intermediate,experienced,0.647382915019989
+intermediate,intermediate,1.0
+experienced,experienced,1.0
+intermediate,intermediate,1.0
+experienced,experienced,1.0
+senior,senior,1.0
+junior,junior,1.0000001192092896
+intermediate,intermediate,1.0
+experienced,experienced,1.0
+intermediate,intermediate,1.0
+intermediate,intermediate,1.0
+intermediate,intermediate,1.0
+intermediate,intermediate,1.0
+intermediate,intermediate,1.0
+lead,lead,1.0
+entry level,entry level,1.0
+experienced,experienced,1.0
+entry-level,intermediate,0.7022477388381958
+senior,senior,1.0
+entry level,entry level,1.0
+entry level,intermediate,0.7054049968719482
+senior,senior,1.0
+senior,senior,1.0
+principal,principal,1.0
+entry level,entry level,1.0
+intermediate,intermediate,1.0
+intermediate,intermediate,1.0
+experienced,experienced,1.0
+experienced,experienced,1.0
+experienced,experienced,1.0
+senior,head,0.671886682510376
+experienced,experienced,1.0
+lead,senior,0.5885132551193237
+intermediate,experienced,0.647382915019989
+junior,intermediate,0.670623242855072
+experienced,head,0.6292899250984192
+experienced,experienced,1.0
+experienced,experienced,1.0
+intermediate,intermediate,1.0
+intermediate,entry level,0.7054049968719482
+intermediate,experienced,0.647382915019989
+intermediate,intermediate,1.0
+experienced,experienced,1.0
+intermediate,intermediate,1.0
+lead,experienced,0.5098032355308533
+experienced,experienced,1.0
+senior,senior,1.0
+experienced,experienced,1.0
+entry level,entry level,1.0
+intermediate,intermediate,1.0
+junior,junior,1.0000001192092896
+experienced,experienced,1.0
+experienced,experienced,1.0
+assistant,assistant,1.0
+experienced,experienced,1.0
+chief,Chief Executive Officer,0.777436375617981
+assistant,assistant,1.0
+experienced,intermediate,0.647382915019989
+senior,senior,1.0
+senior,senior,1.0
+graduate,entry level,0.7016329169273376
+senior,senior,1.0
+experienced,intermediate,0.647382915019989
+lead,lead,1.0
+experienced,senior,0.6280180811882019
+intermediate,entry level,0.7054049968719482
+entry level,entry level,1.0
+assistant,assistant,1.0
+intermediate,intermediate,1.0
+entry level,entry level,1.0
+junior,junior,1.0000001192092896
+director,director,1.000000238418579
+head,senior,0.671886682510376
+entry level,entry level,1.0
+lead,intermediate,0.5622168779373169
+lead,intermediate,0.5622168779373169
+entry level,entry level,1.0
+head,head,1.0000001192092896
+experienced,intermediate,0.647382915019989
+experienced,experienced,1.0
+assistant,assistant principal,0.7827064990997314
+junior,intermediate,0.670623242855072
+intermediate,intermediate,1.0
+associate,associate,0.9999998807907104
+experienced,experienced,1.0
+senior,senior,1.0
+junior,entry level,0.6696158647537231
+principal,senior,0.6337235569953918
+senior,senior,1.0
+junior-to-intermediate,experienced,0.5789122581481934
+intermediate,intermediate,1.0
+entry level,intermediate,0.7054049968719482
+junior,junior,1.0000001192092896
+head,head,1.0000001192092896
+assistant,entry level,0.6055725812911987
+experienced,intermediate,0.647382915019989
+experienced,experienced,1.0
+experienced,experienced,1.0
+experienced,experienced,1.0
+independent,experienced,0.5784419775009155
+experienced,experienced,1.0
+entry level,intermediate,0.7054049968719482
+experienced,experienced,1.0
+experienced,experienced,1.0
+experienced,experienced,1.0
+entry level,entry level,1.0
+entry level,entry level,1.0
+experienced,experienced,1.0
+intermediate,intermediate,1.0
+experienced,experienced,1.0
+experienced,intermediate,0.647382915019989
+experienced,senior,0.6280180811882019
+experienced,experienced,1.0
+intermediate,intermediate,1.0
+entry level,entry level,1.0
+assistant,assistant,1.0
+intermediate,intermediate,1.0
+entry level,entry level,1.0
+senior,senior,1.0
+intermediate,intermediate,1.0
+senior,senior,1.0
+lead,lead,1.0
+experienced,experienced,1.0
+lead,lead,1.0
+intermediate,intermediate,1.0
+senior,senior,1.0
+intermediate,intermediate,1.0
+associate-director,associate director,0.9817437529563904
+experienced,experienced,1.0
+senior,senior,1.0
+senior,senior,1.0
+third-year apprentice,third year apprentice,0.9931516051292419
+intermediate,intermediate,1.0
+intermediate,intermediate,1.0
+associate,associate,0.9999998807907104
+experienced assistant,assistant,0.8387092351913452
+senior,experienced,0.6280180811882019
+entry level,entry level,1.0
+senior,head,0.671886682510376
+senior,senior,1.0
+entry level,entry level,1.0
+experienced,experienced,1.0
+senior,senior,1.0
+head,head,1.0000001192092896
+early-career,postdoctoral,0.594432532787323
+experienced,senior,0.6280180811882019
+experienced,experienced,1.0
+intermediate,intermediate,1.0
+experienced,intermediate,0.647382915019989
+cadet,entry level,0.630725085735321
+senior,senior,1.0
+senior,senior,1.0
+entry level,intermediate,0.7054049968719482
+entry level,intermediate,0.7054049968719482
+experienced,experienced,1.0
+assistant,assistant,1.0
+experienced,intermediate,0.647382915019989
+senior,assistant,0.6236289739608765
+deputy,senior,0.5955651998519897
+principal,senior,0.6337235569953918
+intermediate,intermediate,1.0
+intermediate,intermediate,1.0
+experienced,experienced,1.0
+assistant,assistant,1.0
+experienced,experienced,1.0
+assistant,assistant,1.0
+intermediate,intermediate,1.0
+assistant,assistant,1.0
+lead,lead,1.0
+experienced,experienced,1.0
+intermediate,intermediate,1.0
+experienced,experienced,1.0
+experienced,experienced,1.0
+senior,senior,1.0
+experienced,intermediate,0.647382915019989
+experienced,experienced,1.0
+experienced,experienced,1.0
+entry level,intermediate,0.7054049968719482
+experienced,experienced,1.0
+experienced,experienced,1.0
+experienced,experienced,1.0
+trainee,trainee,1.0
+entry level,intermediate,0.7054049968719482
+assistant,assistant,1.0
+experienced,experienced,1.0
+assistant,assistant,1.0
+executive,senior,0.6287003755569458
+senior,senior,1.0
+intermediate,intermediate,1.0
+entry level,entry level,1.0
+intermediate,intermediate,1.0
+intermediate,intermediate,1.0
+entry level,entry level,1.0
+experienced,experienced,1.0
+intermediate,intermediate,1.0
+experienced,intermediate,0.647382915019989
+assistant,assistant,1.0
+intermediate,intermediate,1.0
+entry level,entry level,1.0
+experienced,intermediate,0.6473828554153442
+experienced,experienced,1.0
+intermediate,lead,0.5622168779373169
+intermediate,intermediate,1.0
+senior,senior,1.0
+associate director,associate director,1.0
+intermediate,intermediate,1.0
+senior,senior,1.0
+trainee,entry level,0.6902104020118713
+intermediate,manager,0.5462226867675781
+supervisor,intermediate,0.5556563138961792
+intermediate,intermediate,1.0
+head,head,1.0000001192092896
+intermediate,intermediate,1.0
+entry level,entry level,1.0000001192092896
+trainee,trainee,1.0
+experienced,experienced,1.0000001192092896
+intermediate,entry level,0.7054048776626587
+entry level,entry level,1.0
+intermediate,intermediate,1.0
+experienced,experienced,1.0000001192092896
+experienced,experienced,1.0
+associate,intermediate,0.5945721864700317
+intermediate,senior,0.6601917147636414
+lead,lead,1.0
+intermediate,intermediate,1.0
+lead,lead,1.0
+lead,lead,1.0
+intermediate,senior,0.6601917147636414
+intermediate,experienced,0.647382915019989
+junior,associate,0.5661089420318604
+intermediate,experienced,0.6473829746246338
+experienced,assistant,0.6425357460975647
+head,head,1.0000001192092896
+intermediate,intermediate,1.0
+experienced,experienced,1.0
+intermediate,intermediate,1.0
+intermediate,manager,0.5462226867675781
+senior,senior,1.0
+intermediate,intermediate,1.0
+intermediate,experienced,0.6473828554153442
+intermediate,intermediate,1.0
+cadet,cadet,1.0
+intermediate,intermediate,1.0
+experienced,experienced,1.0
+experienced,experienced,1.0000001192092896
+senior,senior,1.0
+senior/principal,senior,0.8587790727615356
+senior,senior,1.0
+senior,experienced,0.6280180811882019
+intermediate,intermediate,1.0
+experienced,experienced,1.0
+entry level,entry level,1.0
+experienced,intermediate,0.6473828554153442
+experienced,experienced,1.0
+principal,principal,1.0
+head,principal,0.6016804575920105
+executive,deputy secretary,0.592712938785553
+intermediate,intermediate,1.0
+senior,senior,1.0
+intermediate,senior,0.6601917147636414
+experienced,experienced,1.0
+intermediate,intermediate,1.0
+experienced,experienced,1.0
+intermediate management,senior,0.5956243276596069
+junior,entry level,0.6696158647537231
+experienced,experienced,1.0
+experienced,experienced,1.0
+intermediate,experienced,0.6473828554153442
+senior,lead,0.5885132551193237
+intermediate,intermediate,1.0
+experienced,experienced,1.0
+entry level,entry level,1.0
+director,senior,0.5076090097427368
+experienced,experienced,1.0
+entry level,entry level,1.0
+senior,experienced,0.6280180811882019
+experienced,experienced,1.0
+experienced,experienced,1.0
+graduate,graduate,1.0
+senior lead,senior,0.8538718223571777
+intermediate,entry level,0.7054048776626587
+intermediate,senior,0.6601917147636414
+entry level,entry level,1.0
+senior,experienced,0.6280180811882019
+head,senior,0.671886682510376
+experienced,experienced,1.0
+intermediate,intermediate,1.0
+senior,senior,1.0
+experienced,experienced,1.0
+experienced,experienced,1.0
+intermediate,intermediate,1.0
+entry level,entry level,1.0
+experienced,experienced,1.0
+experienced,experienced,1.0
+trainee,trainee,1.0
+experienced,intermediate,0.6473828554153442
+lead,lead,1.0
+experienced,experienced,1.0
+experienced,experienced,1.0
+experienced,experienced,1.0
+entry level,intermediate,0.7054049968719482
+experienced,intermediate,0.647382915019989
+experienced,experienced,1.0
+intermediate,intermediate,1.0
+lead,senior,0.5885132551193237
+intermediate,intermediate,1.0
+intermediate,experienced,0.6473828554153442
+intermediate,intermediate,1.0
+experienced,experienced,1.0
+experienced,intermediate,0.647382915019989
+senior,senior,1.0
+head,head,1.0000001192092896
+experienced,experienced,1.0
+lead,lead,1.0
+entry level,entry level,1.0
+intermediate,experienced,0.647382915019989
+entry level,entry level,1.0
+senior,senior,1.0
+senior,senior,1.0
+senior,senior,1.0
+experienced,junior,0.5880672931671143
+senior,intermediate,0.6601917743682861
+senior,intermediate,0.6601917743682861
+intermediate,intermediate,1.0
+director,executive,0.6816118955612183
+experienced,experienced,1.0000001192092896
+senior,senior,1.0
+senior,senior,1.0
+senior,head,0.671886682510376
+specialist,senior,0.6047865152359009
+experienced,experienced,1.0
+experienced,intermediate,0.647382915019989
+experienced,intermediate,0.647382915019989
+senior,intermediate,0.6601917147636414
+chief,chief,1.0
+experienced,experienced,1.0000001192092896
+intermediate,lead,0.5622169375419617
+experienced,experienced,1.0000001192092896
+experienced,experienced,1.0000001192092896
+experienced,experienced,1.0000001192092896
+senior,head,0.671886682510376
+intermediate,intermediate,1.0
+senior,experienced,0.6280180811882019
+lead,lead,1.0
+experienced,experienced,1.0000001192092896
+trainee,entry level,0.6902105212211609
+experienced,intermediate,0.6473829746246338
+entry level,intermediate,0.7054049968719482
+experienced,intermediate,0.6473829746246338
+intermediate,intermediate,1.0
+experienced,experienced,1.0000001192092896
+advanced,advanced,1.0
+executive,executive,1.0
+experienced,experienced,1.0
+senior,experienced,0.6280180811882019
+intermediate,intermediate,1.0
+intermediate,senior,0.6601917147636414
+senior,senior,1.0
+intermediate,intermediate,1.0
+experienced,senior,0.6280180811882019
+entry level,entry level,1.0000001192092896
+senior,senior,1.0
+intermediate,intermediate,1.0
+lead,lead,1.0
+experienced,intermediate,0.6473828554153442
+supervisor,supervisor,1.000000238418579
+entry level,entry level,1.0
+assistant,intermediate,0.5677452087402344
+experienced,experienced,1.0
+experienced,experienced,1.0
+retired,senior,0.7350966334342957
+entry level,entry level,1.0
+experienced,experienced,1.0
+intermediate,intermediate,1.0
+intermediate,intermediate,1.0
+senior,senior,1.0
+intermediate,intermediate,1.0
+associate,associate,0.9999998807907104
+intermediate,intermediate,1.0
+experienced,experienced,1.0
+1st year apprentice,apprentice,0.8277633190155029
+experienced,experienced,1.0
+head,head,1.0000001192092896
+intermediate,intermediate,1.0
+senior,senior,1.0
+trainee,trainee,1.0
+chief,chief,1.0
+experienced,experienced,1.0000001192092896
+experienced,experienced,1.0000001192092896
+experienced,experienced,1.0000001192092896
+head,head,1.0000001192092896
+experienced,experienced,1.0000001192092896
+experienced,experienced,1.0000001192092896
+senior,senior,1.0
+entry level,entry level,1.0
+intermediate,intermediate,1.0
+experienced,experienced,1.0
+intermediate,intermediate,1.0
+experienced,experienced,1.0
+head,lead,0.6624467372894287
+senior,experienced,0.6280180811882019
+intermediate,experienced,0.647382915019989
+experienced,experienced,1.0
+head,head,1.0000001192092896
+senior,senior,1.0
+experienced,experienced,1.0000001192092896
+lead,lead,1.0
+experienced,experienced,1.0000001192092896
+assistant,assistant,1.0
+experienced,experienced,1.0000001192092896
+experienced,intermediate,0.647382915019989
+experienced,experienced,1.0
+experienced,experienced,1.0
+entry level,entry level,1.0
+senior,senior,1.0
+associate,associate,0.9999998807907104
+graduate,graduate,1.0
