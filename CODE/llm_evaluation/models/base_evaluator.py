@@ -381,7 +381,16 @@ class LLMEvaluator:
             valid_ground_truth = [self.results["ground_truth"][i] for i in valid_idx]
             
             # Create confusion matrix
-            labels = sorted(list(set(valid_ground_truth + valid_predictions)))
+            all_present_labels = list(set(valid_ground_truth + valid_predictions))
+            
+            # For seniority task, use the predefined order
+            if self.task_name == "seniority":
+                ordered_labels = ["Internship/Trainee", "Entry-Level/Junior", "Mid-Level Professional", 
+                                 "Senior Individual Contributor", "Manager/Supervisor", "Executive/Director"]
+                labels = [label for label in ordered_labels if label in all_present_labels]
+            else:
+                labels = sorted(all_present_labels)
+                
             cm = confusion_matrix(valid_ground_truth, valid_predictions, labels=labels)
             
             # Plot confusion matrix
