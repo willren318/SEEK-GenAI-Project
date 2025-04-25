@@ -11,7 +11,7 @@ import argparse
 def load_seniority_mapping():
     """Load seniority mapping from JSON file"""
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    mapping_path = os.path.join(current_dir, "seniority_mapping.json")
+    mapping_path = os.path.join(current_dir, "seniority_mapping_new.json")
     with open(mapping_path, "r") as f:
         return json.load(f)
 

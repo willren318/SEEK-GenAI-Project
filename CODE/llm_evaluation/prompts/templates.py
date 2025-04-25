@@ -57,27 +57,30 @@ TEMPLATES = {
     Your task is to classify the job posting into exactly ONE of the following seniority categories. Follow the rules strictly.
 
     **Categories and Examples:**
-    - ENTRY_LEVEL: Little to no experience required (e.g., junior, graduate, trainee, apprentice, junior assistant, administrator, entry level, student, receptionist)
-    - MID_LEVEL: Some experience required, performs standard tasks (e.g., intermediate, assistant, qualified, mid-level, standard, level 2)
-    - EXPERIENCED: Significant independent experience, often specialized (e.g., experienced, associate, specialist, coordinator, post-doctoral) - *Requires more than just standard tasks.* 
-    - SENIOR: Substantial experience, high expertise, may mentor but not primarily manage (e.g., senior, advanced, senior associate, mid-senior, senior assistant)
-    - MANAGEMENT: Explicit people/team management responsibilities (e.g., manager, supervisor, lead, assistant manager, middle management)
-    - EXECUTIVE: High-level strategic leadership (e.g., head, principal, executive, director, chief, deputy, board, senior lead, owner)
+    - Internship/Trainee: Very early-career positions, often temporary or student roles (e.g., internship, trainee, apprentice)
+    - Entry-Level/Junior: Positions for newcomers or those with minimal experience (e.g., junior, graduate, junior assistant, administrator, entry level, receptionist)
+    - Mid-Level Professional: Experienced professionals (usually a few years in the field) with greater responsibility (e.g., intermediate,  qualified, experienced, associate, specialist, coordinator, mid-level, standard, level 2)
+    - Senior Individual Contributor: Substantial experience, high expertise, may mentor or lead but not primarily manage (e.g., senior, advanced, senior associate, mid-senior, senior assistant)
+    - Manager/Supervisor: Explicit people/team management responsibilities (e.g., manager, supervisor, assistant manager, middle management)
+    - Executive/Director: Top-level leadership roles overseeing departments or the company (e.g., head, principal, executive, director, chief, deputy, board, senior lead, owner)
 
     **Rules (Apply in Order):**
-    1.  **Prioritize Job Title:** If the Job Title contains a keyword EXACTLY matching an example above (case-insensitive), assign that category immediately. This is the most important rule.
-        *   Example: If title contains "Intermediate", classify as MID_LEVEL, even if description mentions many years experience.
-        *   Example: If title contains "Assistant", classify as MID_LEVEL, unless combined with clear entry terms like "Receptionist".
+    1.  **Prioritize Job Title:** If the Job Title contains a keyword EXACTLY matching an example above (case-insensitive), assign that example's category immediately. This is the most important rule.
+        *   Example: If title contains "Intermediate", classify as `Mid-Level Professional`, even if description mentions many years experience.
+        *   Example: If title contains "Assistant", classify as `Entry-Level/Junior`.
     2.  **Explicit Level Mention:** If no title match, look for explicit phrases like "entry-level role", "senior position", "mid-level opportunity" in the description.
-    3.  **Distinguish MANAGEMENT:** Assign MANAGEMENT *only* if the title clearly indicates management (Manager, Supervisor, Lead) OR the description explicitly mentions direct responsibility for managing/supervising people/teams. Do NOT infer management from words like "coordinate" or "lead" in a project sense.
-    4.  **Distinguish EXPERIENCED vs MID_LEVEL:** Assign EXPERIENCED *only* if the role requires significant independent work, specialization, or >5 years experience *and* the title doesn't indicate MID_LEVEL.
-    5.  **Years Experience (Guideline Only):** Use as a *fallback* guideline if other rules don't apply: 0-2 yrs (ENTRY), 2-5 yrs (MID), 5-8 yrs (EXP), 8+ yrs (SENIOR+).
+    3.  **Distinguish Manager/Supervisor:** Assign Manager/Supervisor *only* if the title clearly indicates management (Manager, Supervisor, Lead) OR the description explicitly mentions direct responsibility for managing/supervising people/teams. Do NOT infer management from words like "coordinate" or "lead" in a project sense. But EXCLUDE national level managers.
+    4.  **Years Experience (Guideline Only):** Use as a *fallback* guideline if other rules don't apply.
+        - 0-1 year (or explicitly an internship) -> **Internship/Trainee** (or Entry-Level if not clearly an intern).
+        - 1-3 years -> **Entry-Level/Junior**.
+        - 3-5 years -> **Mid-Level Professional**.
+        - 5+ years -> **Senior Individual Contributor** (use **Manager/Supervisor** or **Executive/Director** if responsibilities indicate management or leadership).
 
     **Job Advertisement:**
     {job_ad}
 
     CRITICAL FORMATTING REQUIREMENT: 
-    You MUST respond with ONLY ONE of these six category names: ENTRY_LEVEL, MID_LEVEL, EXPERIENCED, SENIOR, MANAGEMENT, or EXECUTIVE.
+    You MUST respond with ONLY ONE of these six category names: Internship/Trainee, Entry-Level/Junior, Mid-Level Professional, Senior Individual Contributor, Manager/Supervisor, or Executive/Director.
     Your entire response must be ONLY the category name with NO other text, explanation, periods, or any additional content.
     """
 }

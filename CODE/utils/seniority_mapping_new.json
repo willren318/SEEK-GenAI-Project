@@ -1,0 +1,78 @@
+{
+    "Internship/Trainee": [
+      "trainee",
+      "apprentice",
+      "student",
+      "1st year apprentice",
+      "apprentice-first-year",
+      "2nd year apprentice",
+      "4th year apprentice",
+      "intermediate apprentice"
+    ],
+    "Entry-Level/Junior": [
+      "entry level",
+      "junior",
+      "graduate",
+      "entry-level",
+      "graduate/junior",
+      "entry level assistant",
+      "junior assistant",
+      "assistant",
+      "junior-intermediate",
+      "entry-level to intermediate"
+    ],
+    "Mid-Level Professional": [
+      "intermediate",
+      "mid-level",
+      "level 2",
+      "qualified",
+      "associate",
+      "specialist",
+      "coordinator",
+      "post-doctoral",
+      "postdoctoral",
+      "experienced assistant",
+      "standard",
+      "experienced"
+    ],
+    "Senior Individual Contributor": [
+      "senior",
+      "senior associate",
+      "mid-senior",
+      "advanced",
+      "senior assistant",
+      "senior/lead",
+      "lead",
+      "senior lead",
+      "principal",
+      "independent",
+      "intermediate to senior"
+    ],
+    "Manager/Supervisor": [
+      "manager",
+      "supervisor",
+      "assistant manager",
+      "sous",
+      "assistant head",
+      "middle management",
+      "middle-management",
+      "general-manager",
+      "assistant director"
+    ],
+    "Executive/Director": [
+      "head",
+      "executive",
+      "director",
+      "chief",
+      "deputy",
+      "board",
+      "owner",
+      "senior head",
+      "senior-executive",
+      "second-in-command",
+      "associate director",
+      "regional head",
+      "owner-operator",
+      "senior executive"
+    ]
+  }

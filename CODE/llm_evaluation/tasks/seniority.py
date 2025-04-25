@@ -71,7 +71,8 @@ def parse_prediction(prediction):
     prediction = prediction.strip()
     
     # Optional: Validate if it's one of the expected categories
-    valid_categories = ["ENTRY_LEVEL", "MID_LEVEL", "EXPERIENCED", "SENIOR", "MANAGEMENT", "EXECUTIVE"]
+    valid_categories = ["Internship/Trainee", "Entry-Level/Junior", "Mid-Level Professional", 
+                        "Senior Individual Contributor", "Manager/Supervisor", "Executive/Director"]
     if prediction in valid_categories:
         return prediction
     else:

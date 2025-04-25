@@ -13,8 +13,9 @@ from config import TASKS_DATAPATH, MODELS, MLFLOW_CONFIG, MODELS_VARIANTS
 def run_experiment(model_type, task_name, dataset_path, sample_range=None, model_variant=None):
     """
     Run a single experiment with the specified model_type, model_variant and task.
-    Example:
-    python run_experiments.py --model claude --task work_arrangement --start_index 0 --end_index 5 --model-variant claude-3-haiku   
+    Examples:
+    python run_experiments.py --model claude --task work_arrangement --start_index 0 --end_index 5 --model-variant claude-3-haiku
+    python run_experiments.py --model claude --task seniority --start_index 0 --end_index 100 --model-variant claude-3-7-sonnet   
     Args:
         model_type (str): type of model to use (claude, llama, deepseek, etc.)
         task_name (str): name of the task (work_arrangement, salary, seniority)
