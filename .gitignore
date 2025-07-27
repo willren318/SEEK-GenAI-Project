@@ -183,7 +183,6 @@ wandb/
 CODE/llm_evaluation/mlruns/*
 .DS_Store
 *.pdf
-CODE/RAG/
 *.png
 *.csv
 *.zip
