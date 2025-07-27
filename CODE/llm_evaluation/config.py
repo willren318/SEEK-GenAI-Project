@@ -24,7 +24,11 @@ MODELS_VARIANTS = {
     "llama3.1-70b": "llama3.1-70b",
     "llama4-maverick": "llama4-maverick",
     "deepseek-chat": "deepseek-chat",
-    "deepseek-reasoner": "deepseek-reasoner"
+    "deepseek-reasoner": "deepseek-reasoner",
+    # TogetherAI model variants - these are for display only, actual API needs full paths
+    "together-llama3.1-70b": "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo",
+    "together-llama3.1-8b": "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+    "together-llama3-70b": "meta-llama/Llama-3-70B-Instruct"
 }
 
 # Define model configurations
@@ -42,6 +46,11 @@ MODELS = {
     "deepseek": {
         "class": "DeepSeekEvaluator",
         "name": "deepseek-chat",
+        "parameters": {}
+    },
+    "togetherAI": {
+        "class": "TogetherAIEvaluator",
+        "name": "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo",  # Default model
         "parameters": {}
     }
 }

@@ -182,4 +182,15 @@ wandb/
 
 CODE/llm_evaluation/mlruns/*
 .DS_Store
-.pdf
+*.pdf
+CODE/RAG/
+*.png
+*.csv
+*.zip
+main.py
+plot_comparison.py
+bubble_evaluator.py
+bubble_chart.py
+togetherAI_evaluator.py
+model_data_converter.py
+model_comparsion_by_task.py

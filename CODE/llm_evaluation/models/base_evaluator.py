@@ -391,10 +391,61 @@ class LLMEvaluator:
             else:
                 labels = sorted(all_present_labels)
                 
+            # Disable LaTeX rendering to prevent special character issues
+            plt.rcParams['text.usetex'] = False
+            plt.rcParams['mathtext.fontset'] = 'cm'
+            
+            # Set a font that supports CJK characters if available
+            try:
+                # Try to use a font that supports CJK characters
+                from matplotlib.font_manager import FontProperties
+                # Try different fonts that might be available on the system
+                font_candidates = ['Arial Unicode MS', 'Heiti TC', 'SimHei', 'NotoSansCJK', 'Noto Sans CJK JP']
+                for font in font_candidates:
+                    try:
+                        plt.rcParams['font.family'] = font
+                        break
+                    except:
+                        continue
+            except:
+                print("Warning: Unable to set a CJK-compatible font. Some characters may not display correctly.")
+            
+            # Escape dollar signs in labels to prevent LaTeX interpretation
+            # Also replace unsupported CJK characters with their romanized equivalents or descriptions
+            sanitized_labels = []
+            for label in labels:
+                if not isinstance(label, str):
+                    sanitized_labels.append(label)
+                    continue
+                    
+                # Replace dollar signs
+                cleaned_label = label.replace("$", r"\$")
+                
+                # Check if label contains CJK characters and create a simplified version if needed
+                has_cjk = any(ord(c) > 0x4E00 and ord(c) < 0x9FFF for c in cleaned_label)
+                if has_cjk:
+                    try:
+                        # Remove or replace CJK characters with spaces
+                        simplified_label = ''.join([c if ord(c) < 0x4E00 or ord(c) > 0x9FFF else ' ' for c in cleaned_label])
+                        # Clean up multiple spaces
+                        simplified_label = ' '.join(simplified_label.split())
+                        if simplified_label.strip():  # If there's something left after removing CJK
+                            sanitized_labels.append(simplified_label)
+                        else:
+                            # If nothing left, use a placeholder
+                            sanitized_labels.append(f"Label {len(sanitized_labels)+1}")
+                    except:
+                        sanitized_labels.append(f"Label {len(sanitized_labels)+1}")
+                else:
+                    sanitized_labels.append(cleaned_label)
+            
+            # Use sanitized labels
+            labels = sanitized_labels
+                
             cm = confusion_matrix(valid_ground_truth, valid_predictions, labels=labels)
             
             # Plot confusion matrix
-            plt.figure(figsize=(10, 8))
+            plt.figure(figsize=(12, 10))  # Increased figure size to accommodate labels better
             plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
             plt.title(f'Confusion Matrix - {self.model_variant} on {self.task_name}')
             plt.colorbar()

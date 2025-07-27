@@ -8,6 +8,7 @@ import mlflow
 from models.claude_evaluator import ClaudeEvaluator
 from models.llama_evaluator import LlamaEvaluator
 from models.deepseek_evaluator import DeepSeekEvaluator
+from models.togetherAI_evaluator import TogetherAIEvaluator
 from config import TASKS_DATAPATH, MODELS, MLFLOW_CONFIG, MODELS_VARIANTS 
 
 def run_experiment(model_type, task_name, dataset_path, sample_range=None, model_variant=None):
@@ -16,8 +17,9 @@ def run_experiment(model_type, task_name, dataset_path, sample_range=None, model
     Examples:
     python run_experiments.py --model claude --task work_arrangement --start_index 0 --end_index 5 --model-variant claude-3-haiku
     python run_experiments.py --model claude --task seniority --start_index 0 --end_index 100 --model-variant claude-3-7-sonnet   
+    python run_experiments.py --model togetherAI --task work_arrangement --start_index 0 --end_index 5 --model-variant meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo
     Args:
-        model_type (str): type of model to use (claude, llama, deepseek, etc.)
+        model_type (str): type of model to use (claude, llama, deepseek, togetherAI, etc.)
         task_name (str): name of the task (work_arrangement, salary, seniority)
         dataset_path (str): path to the dataset
         sample_range (tuple[int, int] | None): Process examples from start index (inclusive) to end index (exclusive). If None, process all.
@@ -52,6 +54,8 @@ def run_experiment(model_type, task_name, dataset_path, sample_range=None, model
         model_class = LlamaEvaluator
     elif model_class_name == "DeepSeekEvaluator":
         model_class = DeepSeekEvaluator
+    elif model_class_name == "TogetherAIEvaluator":
+        model_class = TogetherAIEvaluator
     else:
         raise ValueError(f"Model class '{model_class_name}' not supported yet")
     
@@ -88,7 +92,11 @@ def run_experiment(model_type, task_name, dataset_path, sample_range=None, model
 def main():
     """Main function to parse arguments and run experiments."""
     parser = argparse.ArgumentParser(description="Run LLM evaluation experiments")
-    parser.add_argument("--model", choices=list(MODELS.keys()), 
+    
+    # Update the choices to include togetherAI
+    model_choices = list(MODELS.keys()) + ["togetherAI"] 
+    
+    parser.add_argument("--model", choices=model_choices, 
                         default="claude", help="Model to evaluate")
     parser.add_argument("--task", choices=list(TASKS_DATAPATH.keys()), 
                         required=True, help="Task to evaluate")
@@ -99,7 +107,15 @@ def main():
     parser.add_argument("--tracking-uri", type=str,
                         default=MLFLOW_CONFIG.get("tracking_uri") if MLFLOW_CONFIG else None,
                         help="MLflow tracking URI (default: from config)")
-    parser.add_argument("--model-variant", choices=list(MODELS_VARIANTS.keys()),
+                        
+    # Update model variant choices to include TogetherAI options
+    all_model_variants = list(MODELS_VARIANTS.keys()) + [
+        "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo",
+        "meta-llama/Meta-Llama-3.1-8B-Instruct",
+        "meta-llama/Llama-3-70B-Instruct"
+    ]
+    
+    parser.add_argument("--model-variant", 
                         help="Specific model variant to use")
     args = parser.parse_args()
     
@@ -109,6 +125,20 @@ def main():
     start_index = args.start_index
     end_index = args.end_index
     model_variant = args.model_variant
+    
+    # Handle TogetherAI model separately since it's not in MODELS config
+    if model == "togetherAI" and model not in MODELS:
+        # Add TogetherAI configuration dynamically
+        MODELS["togetherAI"] = {
+            "class": "TogetherAIEvaluator",
+            "name": "TogetherAI LLM",
+            "parameters": {}
+        }
+        
+        # Set default model variant if not specified
+        if not model_variant:
+            model_variant = "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo"
+            print(f"No model variant specified for TogetherAI. Using default: {model_variant}")
         
     # Get dataset path from config
     dataset_path = TASKS_DATAPATH.get(task)
